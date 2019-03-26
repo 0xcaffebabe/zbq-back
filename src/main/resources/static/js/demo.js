@@ -8,9 +8,9 @@ $(document).ready(function () {
         new Chart(lineChart, {
             type: 'line',
             data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
                 datasets: [{
-                    label: 'Users',
+                    label: '请求数',
                     data: [12, 19, 3, 5, 2, 3, 20, 33, 23, 12, 33, 10],
                     backgroundColor: 'rgba(66, 165, 245, 0.5)',
                     borderColor: '#2196F3',

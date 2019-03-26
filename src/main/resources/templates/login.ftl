@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-5">
-                <div class="card p-4">
+                <div class="card p-4" id="login">
                     <div class="card-header text-center text-uppercase h4 font-weight-light">
                         登录
                     </div>
@@ -22,12 +22,12 @@
                     <div class="card-body py-5">
                         <div class="form-group">
                             <label class="form-control-label">账号</label>
-                            <input type="email" class="form-control">
+                            <input type="email" class="form-control" v-model="username">
                         </div>
 
                         <div class="form-group">
                             <label class="form-control-label">密码</label>
-                            <input type="password" class="form-control">
+                            <input type="password" class="form-control" v-model="password" @keyup.enter="login">
                         </div>
 
                         <div class="custom-control custom-checkbox mt-4">
@@ -39,7 +39,7 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-6">
-                                <button type="submit" class="btn btn-primary px-5">登录</button>
+                                <button type="submit" class="btn btn-primary px-5" @click="login">登录</button>
                             </div>
 
                             <div class="col-6">
@@ -59,6 +59,33 @@
 <script src="/js/carbon.js"></script>
 <script src="/js/demo.js"></script>
 <script src="/js/vue.js"></script>
+<script src="/js/md5.js"></script>
+<script src="/js/common.js"></script>
+<script>
 
+    var login = new Vue({
+       el:"#login",
+       data:{
+           username:'',password:''
+       }
+       ,
+        methods:{
+           login:function () {
+
+               if (this.username == '' || this.password == ''){
+                   alert("请将信息填写完整");
+               }else{
+                    common.ajax.post(common.data.loginUrl,function (response) {
+                        if (response.success){
+                            window.location = '/main';
+                        }else{
+                            alert(response.msg);
+                        }
+                    },{username:this.username,password:hex_md5(this.password)});
+               }
+           }
+        }
+    });
+</script>
 </body>
 </html>

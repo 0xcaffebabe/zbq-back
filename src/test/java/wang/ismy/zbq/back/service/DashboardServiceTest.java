@@ -1,4 +1,4 @@
-package wang.ismy.zbq.back.dao;
+package wang.ismy.zbq.back.service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,21 +11,17 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserRepositoryTest {
-
+public class DashboardServiceTest {
 
     @Autowired
-    UserRepository userRepository;
+    DashboardService dashboardService;
 
-
-    @Test
-    public void testCount(){
-        assertEquals(52,userRepository.count());
-    }
-
+    @Autowired
+    AdminService adminService;
 
     @Test
-    public void testToday(){
-        assertEquals(2,userRepository.countTodayLoginUser());
+    public void testD(){
+        adminService.setCurrentAdmin(adminService.findById(1));
+        System.out.println(dashboardService.getDashboard());
     }
 }
