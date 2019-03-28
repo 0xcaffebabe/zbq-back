@@ -1,18 +1,13 @@
 package wang.ismy.zbq.back.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import wang.ismy.zbq.back.AdminPermissionService;
-import wang.ismy.zbq.back.dao.AdminPermissionRepository;
 import wang.ismy.zbq.back.dao.AdminRepository;
 import wang.ismy.zbq.back.dto.LoginDTO;
-import wang.ismy.zbq.back.entity.User;
 import wang.ismy.zbq.back.entity.back.Admin;
 import wang.ismy.zbq.back.entity.back.AdminPermission;
 import wang.ismy.zbq.back.uti.ErrorUtils;

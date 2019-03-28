@@ -32,6 +32,8 @@ public class User {
 
     private LocalDateTime updateTime;
 
+    private LocalDateTime lastLogin;
+
     @Override
     public int hashCode(){
         return userId;

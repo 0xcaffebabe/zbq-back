@@ -1,6 +1,8 @@
 package wang.ismy.zbq.back.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import wang.ismy.zbq.back.annotations.ErrorPage;
 import wang.ismy.zbq.back.annotations.MustLogin;
@@ -20,10 +22,16 @@ public class RedirectController {
         return "main";
     }
 
-    @RequestMapping("/dashboard")
+    @RequestMapping("/manage/{url}")
     @MustLogin
     @ErrorPage
-    public Object dashboard(){
-        return "dashboard";
+    public Object dashboard(@PathVariable("url") String url){
+        return url;
     }
+
+    @GetMapping("")
+    public String home(){
+        return "login";
+    }
+
 }

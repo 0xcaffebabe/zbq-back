@@ -8,13 +8,11 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import wang.ismy.zbq.back.AdminPermissionService;
+import wang.ismy.zbq.back.service.AdminPermissionService;
 import wang.ismy.zbq.back.annotations.Permission;
-import wang.ismy.zbq.back.entity.back.AdminPermission;
 import wang.ismy.zbq.back.service.AdminService;
 import wang.ismy.zbq.back.uti.ErrorUtils;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -38,6 +36,12 @@ public class PermissionAspect {
         Method method = methodSignature.getMethod();
         var a = method.getAnnotation(Permission.class);
 
+        String msg = null;
+        if ("".equals(a.msg())){
+            msg = "没有"+a.value().getPermission()+"权限";
+        }else{
+            msg = a.msg();
+        }
         var permission = adminPermissionService.getCurrentAdminPermission();
 
         try {
@@ -46,14 +50,14 @@ public class PermissionAspect {
             Method method1 = permission.getClass().getMethod("get"+methodName);
             Boolean ret = (Boolean) method1.invoke(permission);
             if (ret == null){
-                ErrorUtils.error(a.msg());
+                ErrorUtils.error(msg);
             }
 
             if (!ret){
-                ErrorUtils.error(a.msg());
+                ErrorUtils.error(msg);
             }
         } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            throw new RuntimeException(a.msg());
+            throw new RuntimeException(e.getMessage());
         }
 
     }

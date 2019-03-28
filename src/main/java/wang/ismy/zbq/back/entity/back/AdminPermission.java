@@ -18,4 +18,6 @@ public class AdminPermission {
     private Boolean createAdmin; // 创建其他管理员的权限
 
     private Boolean dashboardView; // 查看仪表盘数据权限
+
+    private Boolean userDataView; // 查看用户数据的权限
 }

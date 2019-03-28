@@ -14,5 +14,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Permission {
     PermissionEnum value();
-    String msg() default "没有权限";
+    String msg() default "";
 }

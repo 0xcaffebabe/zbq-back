@@ -1,12 +1,10 @@
-package wang.ismy.zbq.back;
+package wang.ismy.zbq.back.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wang.ismy.zbq.back.dao.AdminPermissionRepository;
 import wang.ismy.zbq.back.entity.back.AdminPermission;
-import wang.ismy.zbq.back.service.AdminService;
-import wang.ismy.zbq.back.uti.ErrorUtils;
-import wang.ismy.zbq.back.uti.R;
+
 
 @Service
 public class AdminPermissionService {
@@ -27,4 +25,7 @@ public class AdminPermissionService {
     public AdminPermission getCurrentAdminPermission(){
         return adminPermissionRepository.findById(adminService.getCurrentAdmin().getAdminPermission()).get();
     }
+
+
+
 }

@@ -117,7 +117,9 @@ function getCommonObject() {
         },
         data:{
             loginUrl:"/admin/login",
-            getDashboardUrl:"/dashboard"
+            getDashboardUrl:"/dashboard",
+            getUserListUrl:"/user/list",
+            getUserInfoByIdUrl:"/user/info/"
         }
     }
 }
