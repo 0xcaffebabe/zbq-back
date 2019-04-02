@@ -57,7 +57,7 @@ public class PermissionAspect {
                 ErrorUtils.error(msg);
             }
         } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new RuntimeException(e.getMessage()+","+msg);
         }
 
     }

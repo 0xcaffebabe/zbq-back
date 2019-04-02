@@ -37,4 +37,12 @@ public class UserInfoService {
         ErrorUtils.error(R.CAN_NOT_FOUND);
         return null;
     }
+
+    public UserInfo findByUserInfoId(Integer userInfoId){
+        return userInfoRepository.findById(userInfoId).get();
+    }
+
+    public UserInfo update(UserInfo userInfo){
+        return userInfoRepository.save(userInfo);
+    }
 }

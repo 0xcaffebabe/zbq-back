@@ -36,4 +36,14 @@ public class UserServiceTest {
 
         System.out.println(list);
     }
+
+
+    @Test()
+    public void testUpdate(){
+        var user = userService.findById(55);
+
+        user.setUsername("2019032901");
+
+        userService.update(user);
+    }
 }

@@ -15,7 +15,8 @@ var user = new Vue({
        length:10,
        userList:[],
        kw:'',
-       editUser:{}
+       editUser:{},
+       editUserPermission:{}
    }
    ,
     created:function () {
@@ -104,6 +105,7 @@ var user = new Vue({
             common.ajax.get(common.data.getUserInfoByIdUrl+id,function (response) {
                 if (response.success){
                     that.editUser = response.data;
+                    that.editUser.userId = id;
                 }else{
                     alert("获取用户信息失败");
                 }
@@ -111,9 +113,38 @@ var user = new Vue({
 
         }
         ,
-        editPermission:function () {
+        editPermission:function (id) {
 
            $("#permissionModal").modal("show");
+           var that = this;
+           common.ajax.get(common.data.getUserPermissionByIdUrl+id,function (response) {
+               if (response.success){
+                   that.editUserPermission = response.data;
+               }else{
+                   alert(response.msg);
+
+               }
+           })
+        }
+        ,
+        updateUserInfo:function (id) {
+
+           common.ajax.post(common.data.updateUserInfoUrl+id,function (response) {
+               if (response.success){
+                   alert(response.data);
+               }else{
+                   alert(response.msg);
+               }
+           },this.editUser);
+        }
+        ,
+        resetPassword:function () {
+           var r = prompt("输入该用户的新密码:");
+           if (r){
+               this.editUser.password = hex_md5(r).toUpperCase();
+           }else{
+
+           }
         }
     }
 });

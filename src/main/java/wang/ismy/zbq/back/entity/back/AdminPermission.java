@@ -20,4 +20,12 @@ public class AdminPermission {
     private Boolean dashboardView; // 查看仪表盘数据权限
 
     private Boolean userDataView; // 查看用户数据的权限
+
+    private Boolean updateUser; // 更新用户数据的权限
+
+    private Boolean friendView; // 查看好友关系的权限
+
+    private Boolean stateView; // 查看动态的权限
+
+    private Boolean locationView; // 查看位置的权限
 }

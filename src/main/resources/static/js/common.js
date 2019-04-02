@@ -119,7 +119,12 @@ function getCommonObject() {
             loginUrl:"/admin/login",
             getDashboardUrl:"/dashboard",
             getUserListUrl:"/user/list",
-            getUserInfoByIdUrl:"/user/info/"
+            getUserInfoByIdUrl:"/user/info/",
+            getUserPermissionByIdUrl:"/user/permission/",
+            updateUserInfoUrl:"/user/info/",
+            getFriendListUrl:"/friend/list",
+            getStateListUrl:"/state/list",
+            getLocationListUrl:"/location/list"
         }
     }
 }

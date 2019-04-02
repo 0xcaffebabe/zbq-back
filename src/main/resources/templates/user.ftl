@@ -23,7 +23,8 @@
         <div class="content">
             <div class="container-fluid" id="user">
 
-                <div class="modal fade" id="editInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="editInfoModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -36,7 +37,8 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <img :src="editUser.profile" alt="" class="" width="64" style="border-radius: 50px;">
+                                        <img :src="editUser.profile" alt="" class="" width="64"
+                                             style="border-radius: 50px;">
 
                                     </div>
                                     <div class="col-md-10">
@@ -46,10 +48,10 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="normal-input" class="form-control-label">密码</label>
+                                            <label for="normal-input" class="form-control-label" >密码</label>
                                             <input id="normal-input" class="form-control" v-model="editUser.password"
                                                    disabled/ >
-                                            <button class="btn btn-sm btn-danger" style="float:right">重置密码</button>
+                                            <button class="btn btn-sm btn-danger" @click="resetPassword" style="float:right">重置密码</button>
                                         </div>
 
                                         <div class="form-group">
@@ -59,12 +61,13 @@
 
                                         <div class="form-group">
                                             <label for="normal-input" class="form-control-label">生日</label>
-                                            <input id="normal-input" type="date" class="form-control" value="2019-03-27">
+                                            <input id="normal-input" type="date" class="form-control"
+                                                   v-model="editUser.birthday">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="normal-input" class="form-control-label">笔龄</label>
-                                            <input class="form-control" value="1">
+                                            <input class="form-control" v-model="editUser.penYear">
                                         </div>
 
                                         <div class="form-group">
@@ -77,7 +80,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="normal-input" class="form-control-label">个签</label>
-                                            <textarea name="" id="" cols="30" rows="3" class="form-control" v-model="editUser.description">123</textarea>
+                                            <textarea name="" id="" cols="30" rows="3" class="form-control"
+                                                      v-model="editUser.description"></textarea>
                                         </div>
                                     </div>
 
@@ -87,14 +91,15 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-link" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary" @click="updateUserInfo(editUser.userId)">更新</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="modal fade" id="permissionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="permissionModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -105,49 +110,33 @@
                             </div>
 
                             <div class="modal-body">
-                                <div class="row">
 
+                                <table class="table table-hover">
 
-                                        <div class="toggle-switch" data-ts-color="primary">
-                                            <label for="t1" class="ts-label">登录</label>
-                                            <input id="t1" type="checkbox" hidden="hidden">
-                                            <label for="t1"class="ts-helper"></label>
-                                        </div>
+                                    <thead>
+                                        <tr>
+                                            <td>权限</td>
+                                            <td>状态</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(value,key) in editUserPermission">
+                                            <td>{{key}}</td>
+                                            <td>
+                                                <div class="toggle-switch" data-ts-color="primary">
+                                                    <input :id="key" type="checkbox" hidden="hidden" v-model="editUserPermission[key]">
+                                                    <label :for="key" class="ts-helper"></label>
+                                                </div>
+                                            </td>
+                                        </tr>
 
-
-                                        <div class="toggle-switch" data-ts-color="primary">
-                                            <label for="t2" class="ts-label">内容发布</label>
-                                            <input  id="t2" type="checkbox" hidden="hidden">
-                                            <label for="t2" class="ts-helper"></label>
-                                        </div>
-
-
-
-                                        <div class="toggle-switch" data-ts-color="primary">
-                                            <label for="t3" class="ts-label">内容发布</label>
-                                            <input  id="t3" type="checkbox" hidden="hidden">
-                                            <label for="t3" class="ts-helper"></label>
-                                        </div>
-
-
-                                        <div class="toggle-switch" data-ts-color="primary">
-                                            <label for="t4" class="ts-label">内容发布</label>
-                                            <input  id="t4" type="checkbox" hidden="hidden">
-                                            <label for="t4" class="ts-helper"></label>
-                                        </div>
-
-
-                                        <div class="toggle-switch" data-ts-color="primary">
-                                            <label for="t4" class="ts-label">内容发布</label>
-                                            <input  id="t4" type="checkbox" hidden="hidden">
-                                            <label for="t4" class="ts-helper"></label>
-                                        </div>
+                                    </tbody>
+                                </table>
 
 
 
 
 
-                                </div>
 
 
                             </div>
@@ -185,7 +174,7 @@
                         <td>{{user.lastLogin}}</td>
                         <td>
                             <button class="btn btn-sm btn-success" @click="editInfo(user.userId)">信息编辑</button>
-                            <button class="btn btn-sm btn-primary" @click="editPermission">权限管理</button>
+                            <button class="btn btn-sm btn-primary" @click="editPermission(user.userId)">权限管理</button>
                         </td>
                     </tr>
 
@@ -203,6 +192,7 @@
 <script src="/js/vue.js"></script>
 <script src="/js/common.js"></script>
 <script src="http://momentjs.cn/downloads/moment-with-locales.min.js"></script>
+<script src="/js/md5.js"></script>
 <script src="/js/user.js"></script>
 
 </body>

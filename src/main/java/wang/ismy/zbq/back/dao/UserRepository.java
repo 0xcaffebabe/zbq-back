@@ -17,4 +17,6 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     @Query(nativeQuery = true,value = "SELECT * FROM user WHERE username LIKE '%' ? '%'")
     Page<User> findUserListByUsername(String username, Pageable pageable);
+
+    User findByUsername(String username);
 }
