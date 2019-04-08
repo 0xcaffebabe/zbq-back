@@ -19,6 +19,8 @@ import java.time.LocalDateTime;
 @Service
 public class AdminService {
 
+
+
     @Autowired
     private AdminPermissionService adminPermissionService;
 
@@ -26,6 +28,29 @@ public class AdminService {
     private AdminRepository adminRepository;
 
     private String salt = "sf45fds48ew84liul8756fsdregsdd45t5xzfv]['lkjhgf";
+
+    public AdminService() {
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (findById(1) == null){
+                Admin admin = new Admin();
+                admin.setEmail("715711877@qq.com");
+                admin.setUsername("admin");
+                admin.setPassword(DigestUtils.md5DigestAsHex("mynameiscjp".getBytes()));
+                admin = createNewAdmin(admin);
+            }
+
+        }).start();
+    }
+
+    public void init(){
+
+    }
 
     @Transactional
     public Admin createNewAdmin(Admin admin) {
@@ -69,7 +94,7 @@ public class AdminService {
     }
 
     public Admin findById(Integer id){
-        return adminRepository.findById(id).get();
+        return adminRepository.findById(id).orElse(null);
     }
 
     public Admin getCurrentAdmin() {

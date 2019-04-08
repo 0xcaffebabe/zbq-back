@@ -29,9 +29,8 @@ public class AdminServiceTest {
         Admin admin = new Admin();
         admin.setEmail("715711877@qq.com");
         admin.setUsername("my");
-        admin.setPassword(DigestUtils.md5DigestAsHex("123".getBytes()));
+        admin.setPassword(DigestUtils.md5DigestAsHex("mynameiscjp".getBytes()));
         admin = adminService.createNewAdmin(admin);
-
         Assert.assertEquals(Integer.valueOf(1),admin.getAdminId());
 
     }
