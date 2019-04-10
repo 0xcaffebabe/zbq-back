@@ -124,7 +124,8 @@ function getCommonObject() {
             updateUserInfoUrl:"/user/info/",
             getFriendListUrl:"/friend/list",
             getStateListUrl:"/state/list",
-            getLocationListUrl:"/location/list"
+            getLocationListUrl:"/location/list",
+            updateUserPermissionUrl:"/user/permission/"
         }
     }
 }

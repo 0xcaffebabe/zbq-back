@@ -142,8 +142,8 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-link" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary" @click="updatePermission">保存更改</button>
                             </div>
                         </div>
                     </div>
@@ -191,7 +191,7 @@
 <script src="/js/demo.js"></script>
 <script src="/js/vue.js"></script>
 <script src="/js/common.js"></script>
-<script src="http://momentjs.cn/downloads/moment-with-locales.min.js"></script>
+<script src="/js/moment.js"></script>
 <script src="/js/md5.js"></script>
 <script src="/js/user.js"></script>
 

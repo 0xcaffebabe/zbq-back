@@ -8,9 +8,11 @@ import wang.ismy.zbq.back.annotations.ResultTarget;
 import wang.ismy.zbq.back.service.UserInfoService;
 import wang.ismy.zbq.back.service.UserPermissionService;
 import wang.ismy.zbq.back.service.UserService;
+import wang.ismy.zbq.back.uti.R;
 import wang.ismy.zbq.back.vo.UserInfoVO;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -51,6 +53,13 @@ public class UserController {
         return userPermissionService.findByUserId(id);
     }
 
+    @PostMapping("/permission/{userId}")
+    @ResultTarget
+    @MustLogin
+    public Object updatePermission(@PathVariable("userId") Integer userId, @RequestBody Map<String,Boolean> permissionMap){
+        userPermissionService.updatePermission(userId,permissionMap);
+        return R.UPDATE_SUCCESS;
+    }
     @PostMapping("/info/{id}")
     @ResultTarget
     @MustLogin

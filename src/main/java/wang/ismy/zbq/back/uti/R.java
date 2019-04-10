@@ -11,4 +11,6 @@ public class R {
     public static final String CAN_NOT_FOUND = "查找不到";
 
     public static final String USER_NOT_EXIST = "用户不存在";
+
+    public static final String UPDATE_SUCCESS = "更新成功";
 }

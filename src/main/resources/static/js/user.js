@@ -16,7 +16,8 @@ var user = new Vue({
        userList:[],
        kw:'',
        editUser:{},
-       editUserPermission:{}
+       editUserPermission:{},
+       currentUserId:-1
    }
    ,
     created:function () {
@@ -115,6 +116,7 @@ var user = new Vue({
         ,
         editPermission:function (id) {
 
+           this.currentUserId = id;
            $("#permissionModal").modal("show");
            var that = this;
            common.ajax.get(common.data.getUserPermissionByIdUrl+id,function (response) {
@@ -145,6 +147,19 @@ var user = new Vue({
            }else{
 
            }
+        }
+        ,
+        updatePermission:function () {
+
+           var that = this;
+
+           common.ajax.post(common.data.updateUserPermissionUrl+this.currentUserId,function (r) {
+               if (r.success){
+                   alert(r.data);
+               }else {
+                   alert(r.msg);
+               }
+           },this.editUserPermission);
         }
     }
 });

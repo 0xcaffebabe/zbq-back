@@ -6,10 +6,14 @@ import org.springframework.orm.jpa.persistenceunit.PersistenceUnitPostProcessor;
 import org.springframework.stereotype.Service;
 import wang.ismy.zbq.back.annotations.Permission;
 import wang.ismy.zbq.back.dao.UserPermissionRepository;
+import wang.ismy.zbq.back.entity.User;
 import wang.ismy.zbq.back.entity.UserPermission;
 import wang.ismy.zbq.back.enums.PermissionEnum;
+import wang.ismy.zbq.back.uti.ErrorUtils;
+import wang.ismy.zbq.back.uti.R;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,5 +52,34 @@ public class UserPermissionService {
 
 
         return ret;
+    }
+
+    @Permission(PermissionEnum.UPDATE_USER)
+    public void updatePermission(Integer userId,Map<String,Boolean> map){
+        User user = userService.findById(userId);
+        if (user == null) ErrorUtils.error(R.USER_NOT_EXIST);
+
+        UserPermission userPermission = userPermissionRepository.
+                findById(user.getPermission()).orElse(new UserPermission());
+
+        if (userPermission.getUserPermissionId() == null) ErrorUtils.error(R.UNKNOWN_ERROR);
+        var methods = userPermission.getClass().getMethods();
+        for (var key : map.keySet()){
+
+            try {
+
+                for (var i : methods){
+                    if (i.getName().contains("set"+key)){
+                        i.invoke(userPermission,map.get(key));
+                    }
+                }
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        userPermissionRepository.save(userPermission);
+
+
     }
 }

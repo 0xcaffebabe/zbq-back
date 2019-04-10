@@ -79,6 +79,7 @@
                             <mainClass>wang.ismy.zbq.back.ZbqBackApplication</mainClass>
                         </manifest>
                     </archive>
+                    <finalName>zbq-back</finalName>
                 </configuration>
             </plugin>
             <plugin>
